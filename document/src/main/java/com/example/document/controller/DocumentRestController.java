@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 public class DocumentRestController {
     //필드
-    String fileName = "" ;
+    String fileContent = "" ;
 
     // 서비스 AutoWired
     @Autowired
@@ -46,9 +46,9 @@ public class DocumentRestController {
 
     //파일 저장
     @PostMapping("/fileUpload")
-    public void fileUpload(MultipartFile[] uploadFile){
+    public void fileUpload(MultipartFile[] uploadFile) throws IOException {
 
-        fileName = documentService.saveFile(uploadFile[0]);
+        fileContent = documentService.saveFile(uploadFile[0]);
     }
 
     //파일 저장 정보 프론트로 반환
@@ -59,7 +59,7 @@ public class DocumentRestController {
             resp.setContentType("text/plain");
             resp.setCharacterEncoding("UTF-8");
 
-            String file = fileName;
+            String file = fileContent;
 
             PrintWriter writer = resp.getWriter();
             writer.print(file);
@@ -69,7 +69,7 @@ public class DocumentRestController {
             e.printStackTrace();
         }
         finally {
-            fileName = "";
+            fileContent = "";
         }
     }
 }
