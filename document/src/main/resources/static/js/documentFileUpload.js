@@ -1,6 +1,6 @@
-const fileInput = document.getElementById("fileInput");
+const imageInput = document.getElementById("imageInput");
 
-fileInput.addEventListener('change',function(e){
+imageInput.addEventListener('change',function(e){
 
     var files = e.target.files;
 
@@ -9,7 +9,7 @@ fileInput.addEventListener('change',function(e){
     formData.append('uploadFile', files[0]);
 
     $.ajax({
-            url: "/fileUpload",
+            url: "/imageUpload",
             type: "POST",
             contentType: false,
             processData: false,
@@ -25,7 +25,7 @@ fileInput.addEventListener('change',function(e){
 function getImage(){
     $.ajax({
         type: 'GET',
-        url: '/fileName/return',
+        url: '/imageName/return',
         dataType: 'text',
         success: function(result) {
             makeImg(result);
@@ -54,4 +54,4 @@ function makeImg(imageName){
 
 const upload = document.getElementById("image-btn");
 
-upload.addEventListener('click', () => fileInput.click());
+upload.addEventListener('click', () => imageInput.click());
