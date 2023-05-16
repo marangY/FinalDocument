@@ -45,6 +45,7 @@ function makeImg(imageName){
     let imageEl = document.createElement('img');
 
     imageEl.setAttribute('src', imageName);
+    imageEl.setAttribute('style', 'max-width: 80%;');
 
     new_block.appendChild(imageEl);
 
