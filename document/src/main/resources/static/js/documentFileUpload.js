@@ -112,3 +112,9 @@ const uploadVideo = document.getElementById("video-btn");
 
 uploadImage.addEventListener('click', () => imageInput.click());
 uploadVideo.addEventListener('click', () => videoInput.click());
+
+$(function() {
+
+    $(".content").sortable();
+
+});
