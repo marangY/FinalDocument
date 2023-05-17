@@ -93,6 +93,7 @@ function makeVideo(videoName){
 
     new_block.setAttribute('id', 'blockVideo');
     new_block.setAttribute('class', 'block');
+    new_block.setAttribute('align', 'center');
     new_block.setAttribute('content', videoName);
 
     let videoEl = document.createElement('video');

@@ -41,6 +41,7 @@
                         <div th:id="${block.category}"
                              th:if="${block.category == 'blockVideo'}"
                              th:content="${block.content}"
+                             align="center"
                              class ="block"><video th:src="${block.content}" controls style="max-width: 80%;" ondragstart="return false"></video></div>
 
                         <div th:id="${block.category}"
