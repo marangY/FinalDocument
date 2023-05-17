@@ -45,14 +45,14 @@ public class DocumentRestController {
     }
 
     //이미지 저장
-    @PostMapping("/imageUpload")
+    @PostMapping("/fileUpload")
     public void fileUpload(MultipartFile[] uploadFile) throws IOException {
 
         fileContent = documentService.saveFile(uploadFile[0]);
     }
 
     //이미지 저장 정보 프론트로 반환
-    @RequestMapping(value = "/imageName/return", method = { RequestMethod.GET })
+    @RequestMapping(value = "/fileName/return", method = { RequestMethod.GET })
     public void m1(HttpServletResponse resp) {
 
         try {

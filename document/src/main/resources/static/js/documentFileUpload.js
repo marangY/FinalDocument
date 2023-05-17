@@ -1,4 +1,5 @@
 const imageInput = document.getElementById("imageInput");
+const videoInput = document.getElementById("videoInput");
 
 imageInput.addEventListener('change',function(e){
 
@@ -9,7 +10,7 @@ imageInput.addEventListener('change',function(e){
     formData.append('uploadFile', files[0]);
 
     $.ajax({
-            url: "/imageUpload",
+            url: "/fileUpload",
             type: "POST",
             contentType: false,
             processData: false,
@@ -22,18 +23,51 @@ imageInput.addEventListener('change',function(e){
     });
 });
 
+videoInput.addEventListener('change',function(e){
+
+    var files = e.target.files;
+
+    var formData = new FormData();
+
+    formData.append('uploadFile', files[0]);
+
+    $.ajax({
+            url: "/fileUpload",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success:
+            function(result){
+                alert("저장 성공");
+                getVideo();
+            }
+    });
+});
+
 function getImage(){
     $.ajax({
         type: 'GET',
-        url: '/imageName/return',
+        url: '/fileName/return',
         dataType: 'text',
         success: function(result) {
-            makeImg(result);
+            makeImage(result);
         }
     });
 }
 
-function makeImg(imageName){
+function getVideo(){
+    $.ajax({
+        type: 'GET',
+        url: '/fileName/return',
+        dataType: 'text',
+        success: function(result) {
+            makeVideo(result);
+        }
+    });
+}
+
+function makeImage(imageName){
     let tagArea = document.querySelector('.content');
 
     let new_block = document.createElement('div');
@@ -52,6 +86,28 @@ function makeImg(imageName){
     tagArea.appendChild(new_block);
 }
 
-const upload = document.getElementById("image-btn");
+function makeVideo(videoName){
+    let tagArea = document.querySelector('.content');
 
-upload.addEventListener('click', () => imageInput.click());
+    let new_block = document.createElement('div');
+
+    new_block.setAttribute('id', 'blockVideo');
+    new_block.setAttribute('class', 'block');
+    new_block.setAttribute('content', videoName);
+
+    let videoEl = document.createElement('video');
+
+    videoEl.setAttribute('src', videoName);
+    videoEl.setAttribute('controls', '');
+    videoEl.setAttribute('style', 'max-width: 80%;');
+
+    new_block.appendChild(videoEl);
+
+    tagArea.appendChild(new_block);
+}
+
+const uploadImage = document.getElementById("image-btn");
+const uploadVideo = document.getElementById("video-btn");
+
+uploadImage.addEventListener('click', () => imageInput.click());
+uploadVideo.addEventListener('click', () => videoInput.click());
